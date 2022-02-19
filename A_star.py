@@ -40,7 +40,6 @@ def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str):
             previous_dict[child_node] = (current_node, child_g_cost)
             heapq.heappush(frontier, (child_f_cost, child_h_cost, child_g_cost, child_node))
 
-
 if __name__ == "__main__":
     # File with the edges of the graph (non directed)
     edges_file = open("assets/edges.csv", "r")
