@@ -1,26 +1,30 @@
 import heapq
 
-def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str) -> dict:
+def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str) -> tuple:
     frontier = []
     visited = set()
 
     # Heap used for the frontier, values are always (f_cost, h_cost, g_cost, node)
-    heapq.heappush(frontier, (0, 0, 0, start_node))
+    heapq.heappush(frontier, (0, 0, 0, end_node))
 
     # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
-    previous_dict[start_node] = (None, 0)
+    previous_dict[end_node] = (None, 0)
 
     while frontier:
         f_cost, h_cost, g_cost, current_node = heapq.heappop(frontier)
         visited.add(current_node)
 
-        if current_node == end_node:
-            print("Path Found")
-            print(previous_dict)
-            return previous_dict
+        if current_node == start_node:
+            current_node = start_node
 
-        print(current_node, f_cost)
+            result = []
+
+            while current_node:
+                result.append(current_node)
+                current_node = previous_dict[current_node][0]          
+
+            return result, previous_dict[start_node][1]
 
         children = edges.get(current_node)
 
@@ -29,10 +33,10 @@ def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str) -> dict:
                 continue
             
             child_g_cost = g_cost + edge_cost
-            if child_node == end_node:
+            if child_node == start_node:
                 child_h_cost = 0
             else:
-                child_h_cost = h_costs.get((child_node, end_node)) or h_costs.get((end_node, child_node))
+                child_h_cost = h_costs.get((child_node, start_node)) or h_costs.get((start_node, child_node))
             child_f_cost = child_g_cost + child_h_cost
             
             if child_node in previous_dict:
@@ -67,13 +71,12 @@ if __name__ == "__main__":
         v1, v2, dis = line.strip().split(',')
         h_costs[(v1,v2)] = float(dis)
     
-    print(edges)
-
-    print(h_costs)
-
-    result = A_star(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14")
-    print(result["E14"][1])
-    current = "E14"
-    while current:
-        print(current, end=" <- ")
-        current = result[current][0]
+    for i in range(1, 15):
+        for j in range(1, 15):
+            start_node = f"E{i}"
+            end_node = f"E{j}"
+            result_list, result_distance = A_star(edges=edges, h_costs=h_costs, start_node=start_node, end_node=end_node)
+            
+            print(start_node, end_node, result_distance)
+            print(" -> ".join(result_list), end="\n\n")
+            
