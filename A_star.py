@@ -1,5 +1,4 @@
 import heapq
-import sys    
 
 def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str):
     frontier = []
