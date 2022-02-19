@@ -1,11 +1,13 @@
 import heapq
 
-def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str):
+def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str) -> dict:
     frontier = []
     visited = set()
 
+    # Heap used for the frontier, values are always (f_cost, h_cost, g_cost, node)
     heapq.heappush(frontier, (0, 0, 0, start_node))
 
+    # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
     previous_dict[start_node] = (None, 0)
 
@@ -16,7 +18,7 @@ def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str):
         if current_node == end_node:
             print("Path Found")
             print(previous_dict)
-            return
+            return previous_dict
 
         print(current_node, f_cost)
 
@@ -69,4 +71,9 @@ if __name__ == "__main__":
 
     print(h_costs)
 
-    A_star(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14")
+    result = A_star(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14")
+    print(result["E14"][1])
+    current = "E14"
+    while current:
+        print(current, end=" <- ")
+        current = result[current][0]
