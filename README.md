@@ -23,6 +23,13 @@ And run the following command to install the python dependencies:
 pip install -r requirements.txt
 ```
 
+## How to run
+
+Start the flask server by running the following command in your terminal:
+```bash
+python main.py
+```
+
 ## CSV files
 
 The `real_cost.csv` file contains the information about the **real routes** between the stations, with the cost to go from one station to another. The `direct_cost.csv` file contains the information about the **euclidean distance** between all stations.

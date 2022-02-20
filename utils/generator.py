@@ -96,8 +96,8 @@ class SVGEditor:
         self.soup.find("g", id = graph_id).append(new_path)
         return new_path
 
-    def link_points(self, graph_id: str, color: str, 
-        points: list, edge_costs: dict, is_dotted:bool = False) -> Tag:
+    def link_points(self, graph_id: str, color: str, points: list, 
+        edge_costs: dict = {}, is_dotted:bool = False) -> Tag:
         """
         Links points to a graph container.
         """
@@ -207,6 +207,6 @@ if __name__ == "__main__":
         ("Tanjong", 554.7, 673), 
     ]
     route_id = editor.add_new_route("East West Line (EW)", "#009645", stations)
-    editor.link_points(route_id, "#009645", list(map(lambda x: (x[1], x[2]), stations)))
+    editor.link_points(route_id, "#009645", stations)
 
     editor.save("result.svg")

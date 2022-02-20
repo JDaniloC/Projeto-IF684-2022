@@ -1,0 +1,39 @@
+.modal {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  width: 280px;
+}
+.modal-content {
+  color: #FFFFFF;
+  text-align: center;
+  margin: auto;
+  padding:20px 0;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: rgba(100,100,100,0.9);
+}
+#logs {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  right: 10px;
+  bottom: 10px;
+  padding: 1em;
+  background-color: #FFFFFF;
+}
+div#logs div span {
+  margin: 10px;
+  text-align: center;
+}
+div#logs div span p {
+  margin: 0;
+}
+div#logs div {
+  display: flex;
+  border: solid 1px #CCC;
+}
