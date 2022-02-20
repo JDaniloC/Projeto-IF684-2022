@@ -4,12 +4,6 @@
   <title> Mapa do metrô de Paris </title>
   <rect id="bg" height="1007" width="1410" y="0" x="0" fill="#ffffff"/>
 
-  <g id="legend">
-    <g id="title"></g>
-    <g id="lgcolorbox"></g>
-    <g id="lglabels" font-family="Arial" line-height="100%" fill="#ffffff"></g>
-  </g>
-
   <defs>
     <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
       <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5"/>
@@ -21,7 +15,14 @@
   </defs>
   <rect width="100%" height="100%" fill="url(#grid)" />
 
+  <g id="legend">
+    <g id="title"></g>
+    <g id="lgcolorbox"></g>
+    <g id="lglabels" font-family="Arial" line-height="100%" fill="#ffffff"></g>
+  </g>
+
   <g id="lines" fill="none" stroke-width="4"></g>
   <g id="stns_icons" fill="#ffffff" stroke-width="2"></g>
   <g id="stns_labels" font-family="Arial" line-height="100%"></g>
+  <g id="edges_labels" font-family="Arial" line-height="100%"></g>
 </svg>
