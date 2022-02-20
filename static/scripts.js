@@ -66,7 +66,8 @@ links.addEventListener('click', function(event) {
       reset(event, false);
     }
     const [ start, end ] = stations;
-    getRequest(`/api/v1/?start=${start}&end=${end}`);
+    const algo = document.querySelector("select").value;
+    getRequest(`/api/v1/?start=${start}&end=${end}&algo=${algo}`);
   } 
   event.preventDefault();
 });

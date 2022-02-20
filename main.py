@@ -1,5 +1,7 @@
 from utils import (SVGEditor, nodes_from_csv_file, real_edges_from_csv_file,
-                   direct_edges_from_csv_file, A_star, calculate_time)
+                   direct_edges_from_csv_file, calculate_time, A_star, dijkstra,
+                   best_first_search, breadth_first_search, greedy_search, 
+                   depth_first_search)
 from flask import Flask, request, render_template
 
 
@@ -15,9 +17,25 @@ def index():
 def get_shortest_path():
     req = request.args
     result = {'route': 'null'}, 400
+    algorithm = req.get('algo', 'astar')
     
-    route, distance, frontiers = A_star(real_costs, direct_costs, 
-        start_node = req["start"], end_node = req["end"])
+    algorithms = {
+        "astar": A_star,
+        "dijkstra": dijkstra,
+        "greedy": greedy_search,
+        "dfs": depth_first_search,
+        "best": best_first_search,
+        "bfs": breadth_first_search,
+    }
+
+    params = {
+        "edges": real_costs, 
+        "h_costs": direct_costs,
+        "start_node": req["start"], 
+        "end_node": req["end"],
+    }
+
+    route, distance, frontiers = algorithms[algorithm](**params)
     total_time = calculate_time(route, nodes, VELOCITY, distance)
     if route != None: 
         result = {
