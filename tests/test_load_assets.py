@@ -1,4 +1,4 @@
-from utils import direct_edges_from_csv_file, real_edges_from_csv_file
+from utils import direct_edges_from_csv_file, real_edges_from_csv_file, nodes_from_csv_file
 import pytest, csv, os
 from faker import Faker
 
@@ -76,3 +76,36 @@ def test_real_edges_from_csv_file(fixture_create_csv_file, fixture_receive_fake_
         third_station: [(second_station, float(second_cost))]
     }
 
+def test_nodes_from_csv_file(fixture_create_csv_file, fixture_receive_fake_edges):
+    """
+    Tests the nodes_from_csv_file function.
+    """
+    route_name = faker.company()
+    another_route_name = faker.company()
+    color = faker.color()
+    first_station, second_station = fixture_receive_fake_edges[:2]
+    x1, y1, x2, y2 = (faker.pyfloat(
+        min_value = 0, max_value = 99, right_digits = 2
+    ) for _ in range(4))
+    file_path = fixture_create_csv_file("test_nodes.csv", [
+        ("route", "color", "station", "x", "y"),
+        (route_name, color, first_station, x1, y1), 
+        (route_name, color, second_station, x2, y2),
+        (another_route_name, color, first_station, x1, y2),
+    ])
+    nodes = nodes_from_csv_file(file_path)
+    assert nodes == { 
+        route_name: {
+            "color": color,
+            "stations": [
+                (first_station, x1, y1),
+                (second_station, x2, y2)
+            ]
+        },
+        another_route_name: {
+            "color": color,
+            "stations": [
+                (first_station, x1, y2)
+            ]
+        }
+    }
