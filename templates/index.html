@@ -12,8 +12,14 @@
 
 		<header>
 			<button onclick = "reset()"> Resetar </button>
-			<a href="/load/"> Carregar dados </a>
-			<button href="/contact">Contact</button>
+      <select name="algorithms" id="algorithms">
+        <option value="astar" selected> Algorítimo A* </option>
+        <option value="best"> Melhor primeiro </option>
+        <option value="greedy"> Busca gulosa </option>
+        <option value="dijkstra"> Dijkstra </option>
+        <option value="bfs"> Busca em largura </option>
+        <option value="dfs"> Busca em profundidade </option>
+      </select>
 		</header>
 
     {% include 'image.svg' %}

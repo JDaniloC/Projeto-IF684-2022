@@ -102,8 +102,8 @@ def best_first_search(edges: dict, h_costs: dict, start_node: str,
             previous_dict[child_node] = (current_node, child_g_cost)
             heapq.heappush(frontier, (child_h_cost, child_g_cost, child_node))
 
-def breadth_first_search(edges: dict, start_node: str, 
-                         end_node: str, verbose: bool = False) -> tuple:
+def breadth_first_search(edges: dict, start_node: str, end_node: str, 
+                         verbose: bool = False, **kwargs) -> tuple:
     frontier = []
     visited = set()
 
@@ -144,10 +144,54 @@ def breadth_first_search(edges: dict, start_node: str,
             visited.add(child_node)
             child_g_cost = g_cost + edge_cost
             previous_dict[child_node] = (current_node, child_g_cost)
-            frontier.append((child_g_cost, child_node))           
+            frontier.append((child_g_cost, child_node))
+
+def depth_first_search(edges: dict, start_node: str, end_node: str, 
+                       verbose: bool = False, **kwargs) -> tuple:
+    frontier = []
+    visited = set()
+
+    # list used for the frontier, values are always (g_cost, node) (no priority)
+    frontier.append((0, end_node))
+
+    # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
+    previous_dict = {}
+    previous_dict[end_node] = (None, 0)
+    frontiers = []
+
+    visited.add(end_node)
+
+    while frontier:
+        frontiers.append(list(map(
+            lambda x: (x[-1], round(x[0], 2)
+        ), frontier)))
+        g_cost, current_node = frontier.pop(0)
+        
+        if verbose:
+            print(g_cost, current_node)
+
+        if current_node == start_node:
+            result = []
+
+            while current_node:
+                result.append(current_node)
+                current_node = previous_dict[current_node][0]          
+
+            return result, previous_dict[start_node][1], frontiers
+
+        children = edges.get(current_node)
+
+        for child_node, edge_cost in children:
+            if child_node in visited:
+                continue
+            
+            visited.add(child_node)
+            child_g_cost = g_cost + edge_cost
+            previous_dict[child_node] = (current_node, child_g_cost)
+            frontier.insert(0, (child_g_cost, child_node))
 
 def greedy_search(edges: dict, start_node: str, end_node: str, 
-                  verbose: bool = False) -> tuple:
+                  verbose: bool = False, **kwargs) -> tuple:
     frontier = []
     visited = set()
 
@@ -189,10 +233,10 @@ def greedy_search(edges: dict, start_node: str, end_node: str,
             child_proximity = edge_cost
             
             previous_dict[child_node] = (current_node, child_g_cost)
-            heapq.heappush(frontier, (child_proximity, child_g_cost, child_node))             
+            heapq.heappush(frontier, (child_proximity, child_g_cost, child_node))    
 
 def dijkstra(edges: dict, start_node: str, end_node: str, 
-             verbose: bool = False) -> tuple:
+             verbose: bool = False, **kwargs) -> tuple:
     frontier = []
     visited = set()
 
@@ -272,23 +316,27 @@ if __name__ == "__main__":
     edges = real_edges_from_csv_file("assets/real_cost.csv")
     h_costs = direct_edges_from_csv_file("assets/direct_cost.csv")
     
-    result_list, result_distance = A_star(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14", verbose=True)
+    result_list, result_distance, _ = A_star(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14", verbose=True)
     print("A_star:", result_distance)
     print(" -> ".join(result_list), end="\n\n")
 
-    result_list, result_distance = breadth_first_search(edges=edges, start_node="E1", end_node="E14", verbose=True)
+    result_list, result_distance, _ = breadth_first_search(edges=edges, start_node="E1", end_node="E14", verbose=True)
     print("breadth_first_search:", result_distance)
     print(" -> ".join(result_list), end="\n\n")
 
-    result_list, result_distance = best_first_search(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14", verbose=True)
+    result_list, result_distance, _ = best_first_search(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14", verbose=True)
     print("best_first_search:", result_distance)
     print(" -> ".join(result_list), end="\n\n")
 
-    result_list, result_distance = greedy_search(edges=edges, start_node="E1", end_node="E14", verbose=True)
+    result_list, result_distance, _ = greedy_search(edges=edges, start_node="E1", end_node="E14", verbose=True)
     print("greedy_search:", result_distance)
     print(" -> ".join(result_list), end="\n\n")
 
-    result_list, result_distance = dijkstra(edges=edges, start_node="E1", end_node="E14", verbose=True)
+    result_list, result_distance, _ = dijkstra(edges=edges, start_node="E1", end_node="E14", verbose=True)
     print("dijkstra:", result_distance)
+    print(" -> ".join(result_list), end="\n\n")
+
+    result_list, result_distance, _ = depth_first_search(edges=edges, start_node="E1", end_node="E14", verbose=True)
+    print("Deapth First Search:", result_distance)
     print(" -> ".join(result_list), end="\n\n")
             
