@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg height="900" version="1.1" width="950" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <title>
+  IF684 | Paris Metro Map
+ </title>
+ <rect fill="#ffffff" height="1007" id="bg" width="1410" x="0" y="0"/>
+ <defs>
+  <pattern height="10" id="smallGrid" patternUnits="userSpaceOnUse" width="10">
+   <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5"/>
+  </pattern>
+  <pattern height="100" id="grid" patternUnits="userSpaceOnUse" width="100">
+   <rect fill="url(#smallGrid)" height="100" width="100"/>
+   <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="1"/>
+  </pattern>
+ </defs>
+ <rect fill="url(#grid)" height="100%" width="100%"/>
+ <g id="legend">
+  <rect fill="#f2f2f2" height="295" id="lgbox" width="333" x="590" y="10"/>
+  <g id="title">
+   <text fill="#001e0d" font-family="Arial" font-size="20" font-weight="bold" id="tttitle" x="600" y="30">
+    IF684 | Paris Metro Map
+   </text>
+   <text fill="#001e0d" font-family="Arial" font-size="10" font-weight="bold" id="ttupd" x="600" y="40">
+    Intelligent Systems project
+   </text>
+  </g>
+  <g id="lgcolorbox">
+   <rect fill="#0101ff" height="12.5" width="313" x="600" y="50"/>
+   <rect fill="#ffff00" height="12.5" width="313" x="600" y="62.5"/>
+   <rect fill="#00ff00" height="12.5" width="313" x="600" y="75.0"/>
+   <rect fill="#ff0000" height="12.5" width="313" x="600" y="87.5"/>
+  </g>
+  <g fill="#ffffff" font-family="Arial" id="lglabels" line-height="100%">
+   <text font-size="11" font-weight="bold" id="labelLine_1" x="610" y="60">
+    Line 1
+   </text>
+   <text font-size="11" font-weight="bold" id="labelLine_2" x="610" y="72.5">
+    Line 2
+   </text>
+   <text font-size="11" font-weight="bold" id="labelLine_4" x="610" y="85.0">
+    Line 4
+   </text>
+   <text font-size="11" font-weight="bold" id="labelLine_13" x="610" y="97.5">
+    Line 13
+   </text>
+  </g>
+ </g>
+ <g fill="none" id="lines" stroke-width="4">
+  <g id="Line_1" stroke="#0101ff">
+   <path d="m40.0 360.0 h175.0 s5 0, 5 5  v45.0 h145.0 s5 0, 5 5  v55.0 h115.0 s5 0, 5 5  v25.0 h205.0 s5 0, 5 5  v95.0 v35.0 s0 5, 5 5 h25.0"/>
+  </g>
+  <g id="Line_2" stroke="#ffff00">
+   <path d="m180.0 460.0 v-40.0 s0 -5, 5 -5 h35.0 h145.0 s5 0, 5 -5  v-120.0 h145.0 s5 0, 5 -5  v-25.0 v335.0 s0 5, 5 5 h170.0 v25.0 s0 5, -5 5 h-20.0"/>
+  </g>
+  <g id="Line_4" stroke="#00ff00">
+   <path d="m420.0 790.0 v-85.0 s0 -5, 5 -5 h15.0 v-195.0 s0 -5, 5 -5 h40.0 v-240.0 s0 -5, 5 -5 h30.0 v-115.0"/>
+  </g>
+  <g id="Line_13" stroke="#ff0000">
+   <path d="m250.0 120.0 v160.0 s0 5, 5 5 h120.0 v185.0 v225.0 s0 5, 5 5 h60.0"/>
+  </g>
+ </g>
+ <g fill="#ffffff" id="stns_icons" stroke-width="2">
+  <a fill="#ffffff" xlink:href="#Line_1">
+   <g id="stns_Line_1" stroke="#0101ff">
+    <circle cx="40.0" cy="360.0" id="E1" r="3"/>
+    <circle cx="220.0" cy="410.0" id="E2" r="3"/>
+    <circle cx="370.0" cy="470.0" id="E3" r="3"/>
+    <circle cx="490.0" cy="500.0" id="E4" r="3"/>
+    <circle cx="700.0" cy="600.0" id="E5" r="3"/>
+    <circle cx="730.0" cy="640.0" id="E6" r="3"/>
+   </g>
+  </a>
+  <a fill="#ffffff" xlink:href="#Line_2">
+   <g id="stns_Line_2" stroke="#ffff00">
+    <circle cx="180.0" cy="460.0" id="E10" r="3"/>
+    <circle cx="370.0" cy="290.0" id="E9" r="3"/>
+    <circle cx="520.0" cy="260.0" id="E8" r="3"/>
+    <circle cx="670.0" cy="630.0" id="E7" r="3"/>
+   </g>
+  </a>
+  <a fill="#ffffff" xlink:href="#Line_4">
+   <g id="stns_Line_4" stroke="#00ff00">
+    <circle cx="420.0" cy="790.0" id="E14" r="3"/>
+    <circle cx="440.0" cy="700.0" id="E13" r="3"/>
+    <circle cx="520.0" cy="140.0" id="E12" r="3"/>
+   </g>
+  </a>
+  <a fill="#ffffff" xlink:href="#Line_13">
+   <g id="stns_Line_13" stroke="#ff0000">
+    <circle cx="250.0" cy="120.0" id="E11" r="3"/>
+   </g>
+  </a>
+ </g>
+ <g font-family="Arial" id="stns_labels" line-height="100%">
+  <g fill="#000000" id="lbLine_1">
+   <text font-size="12" id="lbE1" x="25.0" y="375.0">
+    E1
+   </text>
+   <text font-size="12" id="lbE2" x="205.0" y="425.0">
+    E2
+   </text>
+   <text font-size="12" id="lbE3" x="355.0" y="485.0">
+    E3
+   </text>
+   <text font-size="12" id="lbE4" x="475.0" y="515.0">
+    E4
+   </text>
+   <text font-size="12" id="lbE5" x="685.0" y="615.0">
+    E5
+   </text>
+   <text font-size="12" id="lbE6" x="715.0" y="655.0">
+    E6
+   </text>
+  </g>
+  <g fill="#000000" id="lbLine_2">
+   <text font-size="12" id="lbE10" x="165.0" y="475.0">
+    E10
+   </text>
+   <text font-size="12" id="lbE9" x="355.0" y="305.0">
+    E9
+   </text>
+   <text font-size="12" id="lbE8" x="505.0" y="275.0">
+    E8
+   </text>
+   <text font-size="12" id="lbE7" x="655.0" y="645.0">
+    E7
+   </text>
+  </g>
+  <g fill="#000000" id="lbLine_4">
+   <text font-size="12" id="lbE14" x="405.0" y="805.0">
+    E14
+   </text>
+   <text font-size="12" id="lbE13" x="425.0" y="715.0">
+    E13
+   </text>
+   <text font-size="12" id="lbE12" x="505.0" y="155.0">
+    E12
+   </text>
+  </g>
+  <g fill="#000000" id="lbLine_13">
+   <text font-size="12" id="lbE11" x="235.0" y="135.0">
+    E11
+   </text>
+  </g>
+ </g>
+ <g font-family="Arial" id="edges_labels" line-height="100%">
+  <g fill="#000000" id="edLine_1">
+   <text fill="#0101ff" font-size="12" x="227.5" y="402.5">
+    (10.0)
+   </text>
+   <text fill="#0101ff" font-size="12" x="377.5" y="462.5">
+    (8.5)
+   </text>
+   <text fill="#0101ff" font-size="12" x="497.5" y="492.5">
+    (6.3)
+   </text>
+   <text fill="#0101ff" font-size="12" x="707.5" y="592.5">
+    (13.0)
+   </text>
+   <text fill="#0101ff" font-size="12" x="697.5" y="627.5">
+    (3.0)
+   </text>
+  </g>
+  <g fill="#000000" id="edLine_2">
+   <text fill="#ffff00" font-size="12" x="187.5" y="407.5">
+    (3.5)
+   </text>
+   <text fill="#ffff00" font-size="12" x="377.5" y="287.5">
+    (10.0)
+   </text>
+   <text fill="#ffff00" font-size="12" x="527.5" y="257.5">
+    (9.6)
+   </text>
+   <text fill="#ffff00" font-size="12" x="662.5" y="587.5">
+    (30.0)
+   </text>
+   <text fill="#ffff00" font-size="12" x="642.5" y="617.5">
+    (2.4)
+   </text>
+  </g>
+  <g fill="#000000" id="edLine_4">
+   <text fill="#00ff00" font-size="12" x="407.5" y="692.5">
+    (5.1)
+   </text>
+   <text fill="#00ff00" font-size="12" x="452.5" y="492.5">
+    (12.8)
+   </text>
+   <text fill="#00ff00" font-size="12" x="487.5" y="247.5">
+    (15.3)
+   </text>
+   <text fill="#00ff00" font-size="12" x="525.0" y="202.5">
+    (6.4)
+   </text>
+  </g>
+  <g fill="#000000" id="edLine_13">
+   <text fill="#ff0000" font-size="12" x="342.5" y="272.5">
+    (12.2)
+   </text>
+   <text fill="#ff0000" font-size="12" x="380.0" y="382.5">
+    (9.4)
+   </text>
+   <text fill="#ff0000" font-size="12" x="407.5" y="687.5">
+    (18.7)
+   </text>
+  </g>
+ </g>
+</svg>
