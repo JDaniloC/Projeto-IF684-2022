@@ -60,3 +60,42 @@ def direct_edges_from_csv_file(direct_edges_file: str) -> dict:
             direct_edges[(from_station, to_station)] = distance
     
     return direct_edges
+
+def nodes_from_csv_file(nodes_file: str) -> dict:
+    """
+    Reads the csv file and returns a dict of nodes.
+        nodes_file: csv path
+    
+    Returns:
+        nodes: dict = {
+            node: {
+                "color": str
+                "stations": [
+                    (station, x, y), ...
+                ]
+            }, ...
+        }
+        where the node is the name of the route
+        and the station is the station name
+        and the x and y are the coordinates of the station
+    """
+    nodes = {}
+    with open(nodes_file, newline = "") as csvfile:
+        node_list = csv.DictReader(csvfile)
+
+        for node in node_list:
+            route = node["route"]
+            color = node["color"]
+            station = node["station"]
+            x = float(node["x"])
+            y = float(node["y"])
+            if route not in nodes:
+                nodes[route] = {
+                    "color": color,
+                    "stations": []
+                }
+            nodes[route]["stations"].append(
+                (station, x, y)
+            )
+    
+    return nodes

@@ -1,0 +1,22 @@
+route,color,station,x,y
+Line 1,#0101ff,E1,40,360
+Line 1,#0101ff,E2,220,410
+Line 1,#0101ff,E3,370,470
+Line 1,#0101ff,E4,490,500
+Line 1,#0101ff,E5,700,600
+Line 1,#0101ff,E6,730,640
+Line 2,#ffff00,E10,180,460
+Line 2,#ffff00,E2,220,415
+Line 2,#ffff00,E9,370,290
+Line 2,#ffff00,E8,520,260
+Line 2,#ffff00,E5,695,600
+Line 2,#ffff00,E7,670,630
+Line 4,#00ff00,E14,420,790
+Line 4,#00ff00,E13,440,700
+Line 4,#00ff00,E4,485,500
+Line 4,#00ff00,E8,520,255
+Line 4,#00ff00,E12,520,140
+Line 13,#ff0000,E11,250,120
+Line 13,#ff0000,E9,375,285
+Line 13,#ff0000,E3,375,470
+Line 13,#ff0000,E13,440,700
