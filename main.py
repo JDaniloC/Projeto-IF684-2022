@@ -1,10 +1,11 @@
 from utils import (SVGEditor, nodes_from_csv_file, real_edges_from_csv_file,
-                   direct_edges_from_csv_file, A_star)
+                   direct_edges_from_csv_file, A_star, calculate_time)
 from flask import Flask, request, render_template
 
 
 app = Flask(__name__)
 TITLE = "IF684 | Paris Metro Map"
+VELOCITY = 30
 
 @app.route('/')
 def index():
@@ -15,17 +16,16 @@ def get_shortest_path():
     req = request.args
     result = {'route': 'null'}, 400
     
-    route, distance = A_star(edges = real_costs, 
-        h_costs = direct_costs, start_node = req['start'], 
-        end_node = req['end'], verbose = True)
+    route, distance = A_star(real_costs, direct_costs, 
+        start_node = req["start"], end_node = req["end"])
+    total_time = calculate_time(route, nodes, VELOCITY, distance)
     if route != None: 
         result = {
             "route": route, 
-            "distance": distance
+            "total_time": total_time,
         }, 200
     
     return result
-
 
 
 if __name__ == "__main__":
@@ -40,4 +40,4 @@ if __name__ == "__main__":
         editor.link_points(route_id, color, stations, real_costs)
 
     editor.save("templates/image.svg")
-    app.run(debug=True)
+    app.run(debug = True)

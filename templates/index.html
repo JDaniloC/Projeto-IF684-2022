@@ -10,6 +10,12 @@
   </head>
   <body>
 
+		<header>
+			<button onclick = "reset()"> Resetar </button>
+			<a href="/load/"> Carregar dados </a>
+			<button href="/contact">Contact</button>
+		</header>
+
     {% include 'image.svg' %}
 
     <div id="modal" class="modal">
@@ -22,7 +28,7 @@
     <script src={{ url_for('static', filename='scripts.js') }}></script>
   </body>
   <script>
-		let modal = document.getElementById('modal');
+		const modal = document.getElementById('modal');
 		window.setTimeout(function() {
 				modal.style.display="none";
 		}, 3000);

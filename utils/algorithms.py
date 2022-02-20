@@ -1,6 +1,6 @@
 
 from . import real_edges_from_csv_file, direct_edges_from_csv_file
-import heapq
+import heapq, datetime
 
 def A_star(edges: dict, h_costs: dict, start_node: str, 
            end_node: str, verbose: bool = False) -> tuple:
@@ -216,6 +216,37 @@ def dijkstra(edges: dict, start_node: str, end_node: str,
                     continue
             previous_dict[child_node] = (current_node, child_g_cost)
             heapq.heappush(frontier, (child_g_cost, child_node))
+
+def calculate_time(stations: list, lines: dict, 
+    velocity: float, distance: float) -> float:
+    """
+    Calculates the time to travel from one station to another.
+    """
+
+    if len(stations) <= 1: return 0
+
+    station_changes = 0
+    current_line = None
+
+    for key, values in lines.items():
+        lines[key]["stations"] = set(map(lambda x: x[0], values["stations"]))
+
+    for index in range(len(stations) - 1):
+        next_station = stations[index + 1]
+        if current_line is None or (
+            next_station not in lines[current_line]["stations"]
+        ):
+            for line, values in lines.items():
+                if (stations[index] in values["stations"] and 
+                    next_station in values["stations"]):
+                    if current_line is not None:
+                        station_changes += 1
+                    current_line = line
+                    break
+
+    time_in_hours = distance / velocity
+    time_in_minutes = 4 * station_changes + time_in_hours * 60
+    return str(datetime.timedelta(minutes = time_in_minutes))
 
 if __name__ == "__main__":
     edges = real_edges_from_csv_file("assets/real_cost.csv")

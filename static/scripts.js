@@ -2,25 +2,35 @@ let shortestPath = [];
 let stations = [];
 const links = document.getElementById("stns_icons");
 
-// helper function to mark each stations on the shortest path with bigger Cyan circle
 function markShortestPath(path) {
   for (let i = 0; i < path.length; i++) {
     let station = document.getElementById(path[i]);
-    let radius = parseFloat(station.getAttribute('r')) + 2;
-    station.setAttribute('r', radius);
+    station.setAttribute('r', 5);
     station.setAttribute('fill', "#00FFFF");
   }
 }
 
-// ajax get request function (works for IE10+)
 function getRequest(url) {
   let request = new XMLHttpRequest();
   request.open('GET', url, true);
   request.send()
   request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
-      shortestPath = JSON.parse(this.response)['route']
+      const response = JSON.parse(this.response);
+      const total_time = response.total_time;
+      shortestPath = response["route"];
       markShortestPath(shortestPath)
+
+      modal.querySelector(".modal-content").innerHTML = `
+      <p> 
+        <strong>Tempo total:</strong> 
+        <p> ${total_time} </p>
+      </p>
+      `;
+      modal.style.display = "block";
+      window.setTimeout(function() {
+          modal.style.display = "none";
+      }, 3000);
     }
   }
 }
@@ -31,43 +41,29 @@ links.addEventListener('click', function(event) {
     event.target.setAttribute('fill', "#FF0000");
     stations.push(station);
   }
-  else if (stations.length == 1) {
+  else if (stations.length >= 1) {
     event.target.setAttribute('fill', "#00FF00");
     stations.push(station);
+    if (stations.length > 2) {
+      stations = [stations[0], station];
+      reset(event, false);
+    }
     const [ start, end ] = stations;
     getRequest(`/api/v1/?start=${start}&end=${end}`);
-  }
+  } 
   event.preventDefault();
 });
 
-// helper function to reset the color of each station
-function reset(e) {
-    for (let i = 0; i < stations.length; i++) {
-      document.getElementById(stations[i]).setAttribute('fill', "#FFFFFF");
-    }
+function reset(event, clean = true) {
+  if (clean) {
     stations = [];
-    if (shortestPath != []) {
-      for (let i = 0; i < shortestPath.length; i++) {
-        let station = document.getElementById(shortestPath[i]);
-        let radius = parseFloat(station.getAttribute('r')) - 2;
-        station.setAttribute('r', radius);
-        station.setAttribute('fill', "#FFFFFF");
-      }
-      shortestPath = [];
-    }
-    e.preventDefault();
+    shortestPath = [];
+  }
+  const allStations = document.querySelectorAll("circle");
+  for (let i = 0; i < allStations.length; i++) {
+    let station = allStations[i];
+    station.setAttribute('r', 3);
+    station.setAttribute('fill', "#FFFFFF");
+  }
+  event.preventDefault();
 }
-
-// Doubleclick to reset the station selection
-let tapped = false;
-document.addEventListener('dblclick', reset);
-document.addEventListener('touchstart', function(e) {
-    if(!tapped){
-      tapped = setTimeout(function(){ tapped = false; }, 300);
-    }
-    else {    //tapped within 300ms of last tap. double tap
-      clearTimeout(tapped);
-      tapped=false;
-      reset(e);
-    }
-});
