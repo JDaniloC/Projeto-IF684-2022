@@ -1,0 +1,11 @@
+#!/bin/sh
+
+branch=$(git for-each-ref --format='%(upstream:short)' "$(git symbolic-ref -q HEAD)")
+last_push=$(git rev-parse $branch)
+files_changed=$(git diff $last_push --dirstat=files --cached)
+
+python -m pytest -v
+result=$?
+if [ "$result" -ne "0" ]; then
+    exit 1
+fi
