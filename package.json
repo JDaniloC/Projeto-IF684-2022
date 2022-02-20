@@ -1,0 +1,15 @@
+{
+  "name": "Projeto-IF684",
+  "version": "1.0.0",
+  "description": "A* Algorithm in Paris Metro Station",
+  "main": "index.js",
+  "repository": "https://github.com/JDaniloC/Projeto-IF684.git",
+  "author": "JDaniloC <jdsc@cin.ufpe.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^7.0.4"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  }
+}

@@ -1,2 +1,5 @@
 bs4==0.0.1
+lxml==4.7.1
 beautifulsoup4==4.10.0
+pytest==7.0.1
+faker==13.0.0
