@@ -16,12 +16,13 @@ def get_shortest_path():
     req = request.args
     result = {'route': 'null'}, 400
     
-    route, distance = A_star(real_costs, direct_costs, 
+    route, distance, frontiers = A_star(real_costs, direct_costs, 
         start_node = req["start"], end_node = req["end"])
     total_time = calculate_time(route, nodes, VELOCITY, distance)
     if route != None: 
         result = {
             "route": route, 
+            "frontiers": frontiers,
             "total_time": total_time,
         }, 200
     

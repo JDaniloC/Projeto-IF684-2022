@@ -19,7 +19,24 @@ function getRequest(url) {
       const response = JSON.parse(this.response);
       const total_time = response.total_time;
       shortestPath = response["route"];
+      frontiers = response["frontiers"];
       markShortestPath(shortestPath)
+
+      const logsContainer = document.querySelector("#logs");
+      logsContainer.innerHTML = "Evolução das fronteiras:";
+      for (let index = 0; index < frontiers.length; index++) {
+        const elements = frontiers[index];
+        const div = document.createElement("div");
+        for (const [name, cost] of elements) {
+          const span = document.createElement("span");
+          span.innerHTML = `
+            <p><b>${name}</b></p>
+            <p>${cost}</p>
+          `;
+          div.appendChild(span);
+        }
+        logsContainer.appendChild(div);
+      }
 
       modal.querySelector(".modal-content").innerHTML = `
       <p> 

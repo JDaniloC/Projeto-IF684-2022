@@ -1,4 +1,3 @@
-
 from . import real_edges_from_csv_file, direct_edges_from_csv_file
 import heapq, datetime
 
@@ -13,8 +12,12 @@ def A_star(edges: dict, h_costs: dict, start_node: str,
     # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
     previous_dict[end_node] = (None, 0)
+    frontiers = []
 
     while frontier:
+        frontiers.append(list(map(
+            lambda x: (x[-1], round(x[0], 2)
+        ), frontier)))
         f_cost, h_cost, g_cost, current_node = heapq.heappop(frontier)
         visited.add(current_node)
 
@@ -28,7 +31,7 @@ def A_star(edges: dict, h_costs: dict, start_node: str,
                 result.append(current_node)
                 current_node = previous_dict[current_node][0]          
 
-            return result, previous_dict[start_node][1]
+            return result, previous_dict[start_node][1], frontiers
 
         children = edges.get(current_node)
 
@@ -60,8 +63,12 @@ def best_first_search(edges: dict, h_costs: dict, start_node: str,
     # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
     previous_dict[end_node] = (None, 0)
+    frontiers = []
 
     while frontier:
+        frontiers.append(list(map(
+            lambda x: (x[-1], round(x[0], 2)
+        ), frontier)))
         h_cost, g_cost, current_node = heapq.heappop(frontier)
         visited.add(current_node)
 
@@ -75,7 +82,7 @@ def best_first_search(edges: dict, h_costs: dict, start_node: str,
                 result.append(current_node)
                 current_node = previous_dict[current_node][0]          
 
-            return result, previous_dict[start_node][1]
+            return result, previous_dict[start_node][1], frontiers
 
         children = edges.get(current_node)
 
@@ -106,9 +113,14 @@ def breadth_first_search(edges: dict, start_node: str,
     # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
     previous_dict[end_node] = (None, 0)
+    frontiers = []
+
     visited.add(end_node)
 
     while frontier:
+        frontiers.append(list(map(
+            lambda x: (x[-1], round(x[0], 2)
+        ), frontier)))
         g_cost, current_node = frontier.pop(0)
         
         if verbose:
@@ -121,7 +133,7 @@ def breadth_first_search(edges: dict, start_node: str,
                 result.append(current_node)
                 current_node = previous_dict[current_node][0]          
 
-            return result, previous_dict[start_node][1]
+            return result, previous_dict[start_node][1], frontiers
 
         children = edges.get(current_node)
 
@@ -145,8 +157,12 @@ def greedy_search(edges: dict, start_node: str, end_node: str,
     # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
     previous_dict[end_node] = (None, 0)
+    frontiers = []
 
     while frontier:
+        frontiers.append(list(map(
+            lambda x: (x[-1], round(x[0], 2)
+        ), frontier)))
         proximity, g_cost, current_node = heapq.heappop(frontier)
         
         if verbose:
@@ -161,7 +177,7 @@ def greedy_search(edges: dict, start_node: str, end_node: str,
                 result.append(current_node)
                 current_node = previous_dict[current_node][0]          
 
-            return result, previous_dict[start_node][1]
+            return result, previous_dict[start_node][1], frontiers
 
         children = edges.get(current_node)
 
@@ -186,8 +202,12 @@ def dijkstra(edges: dict, start_node: str, end_node: str,
     # Dictionary used to find and store the shortest path, each node points to the previous node and stores g_cost
     previous_dict = {}
     previous_dict[end_node] = (None, 0)
+    frontiers = []
 
     while frontier:
+        frontiers.append(list(map(
+            lambda x: (x[-1], round(x[0], 2)
+        ), frontier)))
         g_cost, current_node = heapq.heappop(frontier)
         visited.add(current_node)
 
@@ -201,7 +221,7 @@ def dijkstra(edges: dict, start_node: str, end_node: str,
                 result.append(current_node)
                 current_node = previous_dict[current_node][0]          
 
-            return result, previous_dict[start_node][1]
+            return result, previous_dict[start_node][1], frontiers
 
         children = edges.get(current_node)
 

@@ -21,9 +21,14 @@
     <div id="modal" class="modal">
       <div class="modal-content">
         <p> <strong>Clique</strong> para selecionar a estação </p>
-        <p> <strong>Clique duas vezes</strong> para resetar </p>
+				<p> Clique primeiro no destino, </p>
+				<p> e depois na origem! </p>
       </div>
     </div>
+
+		<div id = "logs">
+			Evolução das fronteiras:
+		</div>
 
     <script src={{ url_for('static', filename='scripts.js') }}></script>
   </body>
@@ -31,6 +36,6 @@
 		const modal = document.getElementById('modal');
 		window.setTimeout(function() {
 				modal.style.display="none";
-		}, 3000);
+		}, 5000);
   </script>
 </html>
