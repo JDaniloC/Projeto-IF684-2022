@@ -1,3 +1,5 @@
+from utils import real_edges_from_csv_file, direct_edges_from_csv_file
+
 import heapq
 
 def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str, verbose: bool = False) -> tuple:
@@ -211,30 +213,8 @@ def dijkstra(edges: dict, start_node: str, end_node: str, verbose: bool = False)
             heapq.heappush(frontier, (child_g_cost, child_node))
 
 if __name__ == "__main__":
-    # File with the edges of the graph (non directed)
-    edges_file = open("assets/edges.csv", "r")
-
-    # File with the straight line heuristic distances between all nodes
-    h_costs_file = open("assets/h_costs.csv", "r")
-
-    edges = {}
-    h_costs = {}
-
-    for line in edges_file:
-        v1, v2, dis = line.strip().split(',')
-        if v1 not in edges:
-            edges[v1] = [(v2, float(dis))]
-        else:
-            edges[v1].append((v2,float(dis)))
-            
-        if v2 not in edges:
-            edges[v2] = [(v1, float(dis))]
-        else:
-            edges[v2].append((v1, float(dis)))
-            
-    for line in h_costs_file:
-        v1, v2, dis = line.strip().split(',')
-        h_costs[(v1,v2)] = float(dis)
+    edges = real_edges_from_csv_file("assets/real_cost.csv")
+    h_costs = direct_edges_from_csv_file("assets/direct_cost.csv")
     
     result_list, result_distance = A_star(edges=edges, h_costs=h_costs, start_node="E1", end_node="E14", verbose=True)
     print("A_star:", result_distance)

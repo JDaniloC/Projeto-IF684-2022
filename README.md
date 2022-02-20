@@ -8,3 +8,7 @@ Run the following command in your terminal, to install the python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
+
+## CSV files
+
+The `real_cost.csv` file contains the information about the **real routes** between the stations, with the cost to go from one station to another. The `direct_cost.csv` file contains the information about the **euclidean distance** between all stations.
