@@ -1,8 +1,9 @@
-from utils import real_edges_from_csv_file, direct_edges_from_csv_file
 
+from . import real_edges_from_csv_file, direct_edges_from_csv_file
 import heapq
 
-def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str, verbose: bool = False) -> tuple:
+def A_star(edges: dict, h_costs: dict, start_node: str, 
+           end_node: str, verbose: bool = False) -> tuple:
     frontier = []
     visited = set()
 
@@ -48,7 +49,8 @@ def A_star(edges: dict, h_costs: dict, start_node: str, end_node: str, verbose: 
             previous_dict[child_node] = (current_node, child_g_cost)
             heapq.heappush(frontier, (child_f_cost, child_h_cost, child_g_cost, child_node))
 
-def best_first_search(edges: dict, h_costs: dict, start_node: str, end_node: str, verbose: bool = False) -> tuple:
+def best_first_search(edges: dict, h_costs: dict, start_node: str, 
+                      end_node: str, verbose: bool = False) -> tuple:
     frontier = []
     visited = set()
 
@@ -93,7 +95,8 @@ def best_first_search(edges: dict, h_costs: dict, start_node: str, end_node: str
             previous_dict[child_node] = (current_node, child_g_cost)
             heapq.heappush(frontier, (child_h_cost, child_g_cost, child_node))
 
-def breadth_first_search(edges: dict, start_node: str, end_node: str, verbose: bool = False) -> tuple:
+def breadth_first_search(edges: dict, start_node: str, 
+                         end_node: str, verbose: bool = False) -> tuple:
     frontier = []
     visited = set()
 
@@ -131,7 +134,8 @@ def breadth_first_search(edges: dict, start_node: str, end_node: str, verbose: b
             previous_dict[child_node] = (current_node, child_g_cost)
             frontier.append((child_g_cost, child_node))           
 
-def greedy_search(edges: dict, start_node: str, end_node: str, verbose: bool = False) -> tuple:
+def greedy_search(edges: dict, start_node: str, end_node: str, 
+                  verbose: bool = False) -> tuple:
     frontier = []
     visited = set()
 
@@ -171,7 +175,8 @@ def greedy_search(edges: dict, start_node: str, end_node: str, verbose: bool = F
             previous_dict[child_node] = (current_node, child_g_cost)
             heapq.heappush(frontier, (child_proximity, child_g_cost, child_node))             
 
-def dijkstra(edges: dict, start_node: str, end_node: str, verbose: bool = False) -> tuple:
+def dijkstra(edges: dict, start_node: str, end_node: str, 
+             verbose: bool = False) -> tuple:
     frontier = []
     visited = set()
 
