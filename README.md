@@ -3,7 +3,21 @@ Project with the goal to find the shortest path between two stations in the Pari
 
 ## How to install
 
-Run the following command in your terminal, to install the python dependencies:
+Run the following command in your terminal, to install the husky (a tool to apply a shared git's hook)::
+
+```bash
+npm install
+npm run prepare
+```
+
+Or, if you're using yarn:
+
+```bash
+yarn
+yarn prepare
+```
+
+And run the following command to install the python dependencies:
 
 ```bash
 pip install -r requirements.txt
