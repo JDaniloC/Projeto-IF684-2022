@@ -1,6 +1,6 @@
 bs4==0.0.1
 lxml==4.9.1
 beautifulsoup4==4.10.0
-pytest==7.0.1
+pytest==9.0.3
 faker==13.0.0
 flask==2.3.2
